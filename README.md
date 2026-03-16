@@ -1,3 +1,5 @@
+![Docker Image Version](https://img.shields.io/docker/v/alihssini/y-webrtc-signaling?arch=arm64&sort=semver&logo=webrtc&label=y-webrtc-signaling)
+
 # WebRTC connector for [Yjs](https://github.com/yjs/yjs)
 
 Propagates document updates peer-to-peer to all users using WebRTC.
@@ -36,7 +38,25 @@ The peers find each other by connecting to a signaling server. This package impl
 # start signaling server
 PORT=4444 node ./bin/server.js
 ```
+### Docker:
+```sh
+docker run -d \
+  --name signaling-server \
+  -p 4444:4444 \
+  alihssini/y-webrtc-signaling:latest
+```
 
+### Docker Compose:
+```yaml
+services:
+  y-webrtc-signaling:
+    container_name: y-webrtc-signaling
+    image: alihssini/y-webrtc-signaling:latest
+    restart: always
+    network_mode: bridge
+    ports:
+      - 4444:4444
+```
 Peers using the same signaling server will find each other. You can specify several custom signaling servers like so:
 
 ```js
